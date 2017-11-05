@@ -1,15 +1,24 @@
-var request = require('request')
+var keysExport = require("./keys.js");
+var fs = require("fs");
+var request = require('request');
+var Twitter = require("twitter");
 
-var nodeArgs = process.argv
+var client = new Twitter({
+  consumer_key: '',
+  consumer_secret: '',
+  access_token_key: '',
+  access_token_secret: ''
+});
 
-var songName = ''
+var Spotify = require('node-spotify-api');
 
-for (var i = 2; i < nodeArgs.length; i++) {
-	
-	if (i > 2 && i < nodeArgs.length) {
-		songName = songName + '+' + nodeArgs[i]
-	} else {
-		songName += nodeArgs[i]
-	}
-	
-}
+var spotify = new Spotify({
+  id: <your spotify client id>,
+  secret: <your spotify client secret>
+});
+
+var input = process.argv[2];
+
+if (input === myTweets) {
+
+};
