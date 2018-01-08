@@ -1,7 +1,11 @@
+// Dependencies
+
 var keysExport = require("./keys.js");
 var fs = require("fs");
 var request = require('request');
 var Twitter = require("twitter");
+
+// Adding Twitter API keys from keys.js file
 
 var client = new Twitter({
   consumer_key: keysExport.twitterKeys.consumer_key,
@@ -10,7 +14,9 @@ var client = new Twitter({
   access_token_secret: keysExport.twitterKeys.access_token_secret
 });
 
-var params = {screen_name: '', count: 20};
+var params = {screen_name: 'DennyWu105', count: 20};
+
+// Adding Spotify API keys
 
 var Spotify = require('node-spotify-api');
 
@@ -20,8 +26,12 @@ var spotify = new Spotify({
 });
 
 var input = process.argv[2];
+
+// The following two lines are for the do-what-it-says command. The variables are intended to keep the LIRI command and song title separate.
 var commandOne = []
 var commandTwo = []
+
+// A function for making an OMDB query. The argument is the title of the film.
 
 function omdbInfo (movie) {
   var omdbQuery = movie;
@@ -58,12 +68,55 @@ function omdbInfo (movie) {
   };
 }
 
+// A function for making a Spotify request
+
+function spotifyInfo (song) {
+  
+  if (song === undefined || song.length === 0) {
+
+    spotify.search({ type: 'track', query: 'The Sign' }, function(err, data) {
+      if (err) {
+        return console.log('Error occurred: ' + err);
+      }
+    console.log(data);
+    });
+  }
+  else {
+
+    spotify.search({ type: 'track', query: 'The Sign' }, function(err, data) {
+      if (err) {
+        return console.log('Error occurred: ' + err);
+      }
+    console.log(data);
+    });
+
+  }
+
+}
+
+// The LIRI commands
+
 if (input === "movie-this") {
 
   omdbInfo(process.argv[3])
 
-} 
+}
+else if (input === "my-tweets") {
+
+  client.get('statuses/user_timeline', params, function(error, tweets, response) {
+    if (!error) {
+      console.log(tweets);
+    }
+  });
+
+}
+else if (input === "spotify-this-song") {
+
+  spotifyInfo(process.argv[3])
+
+}
 else if (input === "do-what-it-says") {
+
   fs.readFile("random.txt", "utf8", function(error, response) {
     if (error) {
       console.log(error)
@@ -102,4 +155,5 @@ else if (input === "do-what-it-says") {
       }
     }
   });
+
 }
