@@ -164,9 +164,9 @@ else if (input === "do-what-it-says") {
         console.log(commandTwo);
       }
 
-      if (commandOne === "movie-this") {
+      if (commandOne === "spotify-this-song") {
 
-        omdbInfo(commandTwo);
+        spotifyInfo(commandTwo);
 
       }
     }
