@@ -74,11 +74,17 @@ function spotifyInfo (song) {
   
   if (song === undefined || song.length === 0) {
 
-    spotify.search({ type: 'track', query: 'The Sign' }, function(err, data) {
+    spotify.search({ type: 'track', query: 'Bye Bye Bye' }, function(err, data) {
       if (err) {
         return console.log('Error occurred: ' + err);
       }
-    console.log(data);
+        // console.log(data.tracks.items[0])
+        for (var i = 0; i < data.tracks.items[0].artists.length; i++) {
+          console.log("Artist(s):" + data.tracks.items[0].artists[i].name)
+        };
+        console.log("Song Name:" + data.tracks.items[0].name)
+        console.log("Preview URL:" + data.tracks.items[0].preview_url)
+        console.log("Album:" + data.tracks.items[0].album.name)
     });
   }
   else {
@@ -87,7 +93,12 @@ function spotifyInfo (song) {
       if (err) {
         return console.log('Error occurred: ' + err);
       }
-    console.log(data);
+        for (var i = 0; i < data.tracks.items[0].artists.length; i++) {
+          console.log("Artist(s): " + data.tracks.items[0].artists[i].name)
+        };
+        console.log("Song Name: " + data.tracks.items[0].name)
+        console.log("Preview URL: " + data.tracks.items[0].preview_url)
+        console.log("Album: " + data.tracks.items[0].album.name)
     });
 
   }
