@@ -83,7 +83,7 @@ function spotifyInfo (song) {
   }
   else {
 
-    spotify.search({ type: 'track', query: 'The Sign' }, function(err, data) {
+    spotify.search({ type: 'track', query: song }, function(err, data) {
       if (err) {
         return console.log('Error occurred: ' + err);
       }
@@ -106,8 +106,11 @@ else if (input === "my-tweets") {
   client.get('statuses/user_timeline', params, function(error, tweets, response) {
     if (!error) {
       // console.log(tweets);
-      console.log(tweets.created_at);
-      console.log(tweets.text);
+      for (var i = 0; i < tweets.length; i++) {
+        console.log(tweets[i].created_at);
+        console.log(tweets[i].text);
+        console.log("");
+      };
     }
   });
 
